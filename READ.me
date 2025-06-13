@@ -1,0 +1,44 @@
+# Tokenization & Byte Pair Encoding for Large Language Models
+
+This project demonstrates how modern Large Language Models (LLMs) break down raw text into machine-readable units through custom tokenization and Byte Pair Encoding (BPE) — the same technique used by models like GPT.
+
+
+Tokenization:
+
+A custom tokenizer is implemented using Python’s 're' library to split raw text into:
+- Words and subwords
+- Punctuation (e.g. `,`, `.`, `--`)
+- Special markers like `<|unk|>` (unknown) and `<|endoftext|>`
+
+Features:
+- Regex-based splitting on common punctuation and whitespace
+- Handles unknown tokens gracefully
+- Builds both token → ID and ID → token vocab mappings
+- Supports encoding and decoding of any text passage
+
+python
+tokenizer.encode("Hello, do you like tea?")
+# ➝ ['<|unk|>', ',', 'do', 'you', 'like', 'tea', '?']
+
+
+The project then transitions to using GPT-2’s tokenizer via OpenAI’s tiktoken, which applies BPE:
+
+    -Breaks words into common subword units
+    -Reduces vocabulary size while retaining flexibility
+    -Avoids the need for an <unk> token
+
+    
+
+Tokenization and BPE are foundational for:
+
+    -Feeding clean input into LLMs
+    -Handling unlimited vocabulary with fixed model size
+    -Ensuring stable training and efficient memory usage
+
+
+
+Tech Used
+    -Python
+    -Regex
+    -tiktoken (OpenAI BPE)
+    -GPT-2 vocabulary
